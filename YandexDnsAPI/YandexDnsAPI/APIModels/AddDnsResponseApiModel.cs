@@ -1,10 +1,7 @@
 ﻿namespace YandexDnsAPI.APIModels.Response
 {
-    internal class AddDnsResponseApiModel
+    internal class AddDnsResponseApiModel: BaseDnsResponseApiModel
     {
-        public string domain { get; set; }
         public Record record { get; set; }
-        public string success { get; set; }
-        public string error { get; set; }
     }
 }

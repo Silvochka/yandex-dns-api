@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
+using System.Linq;
 using System.Threading.Tasks;
 using YandexDnsAPI.APIModels;
 using YandexDnsAPI.APIModels.Response;
 using YandexDnsAPI.Enums;
+using YandexDnsAPI.Helpers;
 using YandexDnsAPI.Models.Request;
 using YandexDnsAPI.Models.Response;
 
@@ -12,8 +13,8 @@ namespace YandexDnsAPI.Services
 {
     public static class YandexDnsApiService
     {
-        private static readonly HttpClient client = new HttpClient();
         private static readonly string AddDnsEndpoint = "https://pddimp.yandex.ru/api2/admin/dns/add";
+        private static readonly string GetDnsEndpoint = "https://pddimp.yandex.ru/api2/admin/dns/list?domain=";
 
         public static async Task<RecordResponseModel> AddDnsRecord(AddDnsRequestModel request)
         {
@@ -33,11 +34,29 @@ namespace YandexDnsAPI.Services
             AddIfNotNull(request.Weight, ApiParameters.Weight, parameters);
             AddIfNotNull(request.DomainContent.TTL, ApiParameters.TTL, parameters);
 
-            var response = await RequestPostAsync<AddDnsResponseApiModel>(AddDnsEndpoint, request.Token, parameters);
+            var response = await HttpHelper.RequestPostAsync<AddDnsResponseApiModel>(AddDnsEndpoint, request.Token, parameters);
 
             if (response.success == SuccessStates.Ok)
             {
-                return RecordResponseModel.FromApiModel(response);
+                ValidationHelper.ThrowIfNull(response);
+                return RecordResponseModel.FromApiModel(response.record);
+            }
+            else
+            {
+                throw new ApplicationException(response.error);
+            }
+        }
+
+        public static async Task<IEnumerable<RecordResponseModel>> GetDnsRecord(GetDnsRequestModel request)
+        {
+            request.Validate();
+
+            var uri = GetDnsEndpoint + request.Domain;
+            var response = await HttpHelper.RequestGetAsync<GetDnsResponseApiModel>(uri, request.Token);
+
+            if (response.success == SuccessStates.Ok)
+            {
+                return response.records.Select(x => RecordResponseModel.FromApiModel(x));
             }
             else
             {
@@ -59,23 +78,6 @@ namespace YandexDnsAPI.Services
             {
                 parameters.Add(key, value.Value.ToString());
             }
-        }
-
-        private static async Task<T> RequestPostAsync<T>(string endpoint, string token, Dictionary<string, string> requestParameters)
-        {
-            var content = new FormUrlEncodedContent(requestParameters);
-
-            if (client.DefaultRequestHeaders.Contains(ApiHeaders.Token))
-            {
-                client.DefaultRequestHeaders.Remove(ApiHeaders.Token);
-            }
-
-            client.DefaultRequestHeaders.Add(ApiHeaders.Token, token);
-
-            var response = await client.PostAsync(endpoint, content);
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseString);
         }
     }
 }

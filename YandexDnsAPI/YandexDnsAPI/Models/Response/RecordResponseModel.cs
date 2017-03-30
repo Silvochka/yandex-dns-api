@@ -1,5 +1,5 @@
 ﻿using System;
-using YandexDnsAPI.APIModels.Response;
+using YandexDnsAPI.APIModels;
 using YandexDnsAPI.Enums;
 using YandexDnsAPI.Helpers;
 
@@ -11,21 +11,20 @@ namespace YandexDnsAPI.Models.Response
 
         public string Fqdn { get; set; }
 
-        internal static RecordResponseModel FromApiModel(AddDnsResponseApiModel apiModel)
+        internal static RecordResponseModel FromApiModel(Record record)
         {
-            ValidationHelper.ThrowIfNull(apiModel);
-            ValidationHelper.ThrowIfNull(apiModel.record);
+            ValidationHelper.ThrowIfNull(record);
 
             return new RecordResponseModel()
             {
-                RecordId = apiModel.record.record_id,
-                Type = (DnsSource.DnsTypeEnum)Enum.Parse(typeof(DnsSource.DnsTypeEnum), apiModel.record.type),
-                Domain = apiModel.record.domain,
-                Fqdn = apiModel.record.fqdn,
-                TTL = apiModel.record.ttl,
-                SubDomain = apiModel.record.subdomain,
-                Content = apiModel.record.content,
-                Priority = apiModel.record.priority
+                RecordId = record.record_id,
+                Type = (DnsSource.DnsTypeEnum)Enum.Parse(typeof(DnsSource.DnsTypeEnum), record.type),
+                Domain = record.domain,
+                Fqdn = record.fqdn,
+                TTL = record.ttl,
+                SubDomain = record.subdomain,
+                Content = record.content,
+                Priority = record.priority
             };
         }
     }
