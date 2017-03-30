@@ -7,8 +7,14 @@ namespace YandexDnsAPI.Models.Response
 {
     public class RecordResponseModel : DomainContent
     {
+        /// <summary>
+        /// DNS record identificator
+        /// </summary>
         public int RecordId { get; set; }
 
+        /// <summary>
+        /// Full Qualified Domain Name
+        /// </summary>
         public string Fqdn { get; set; }
 
         internal static RecordResponseModel FromApiModel(Record record)

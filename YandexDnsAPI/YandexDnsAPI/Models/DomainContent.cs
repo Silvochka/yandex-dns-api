@@ -34,6 +34,7 @@ namespace YandexDnsAPI.Models
 
         /// <summary>
         /// Lifetime of DNS record in seconds.
+        /// Allowed values are between 900 and 1209600
         /// Defauls value is 21600.
         /// </summary>
         public int? TTL { get; set; }

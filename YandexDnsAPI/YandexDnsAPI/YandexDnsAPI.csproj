@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIModels\EditDnsResponseApiModel.cs" />
     <Compile Include="APIModels\BaseDnsResponseApiModel.cs" />
     <Compile Include="APIModels\GetDnsResponseApiModel.cs" />
     <Compile Include="APIModels\ApiParameters.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Models\DomainContent.cs" />
+    <Compile Include="Models\Request\EditDnsRequestModel.cs" />
     <Compile Include="Models\Request\GetDnsRequestModel.cs" />
     <Compile Include="Models\Response\RecordResponseModel.cs" />
     <Compile Include="Models\Request\AddDnsRequestModel.cs" />

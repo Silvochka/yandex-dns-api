@@ -10,6 +10,9 @@ namespace YandexDnsAPI.Models.Request
         /// </summary>
         public string Token { get; set; }
 
+        /// <summary>
+        /// Domain properties
+        /// </summary>
         public DomainContent DomainContent { get; set; }
 
         /// <summary>
@@ -39,6 +42,7 @@ namespace YandexDnsAPI.Models.Request
         public void Validate()
         {
             ValidationHelper.ThrowIfNullOrEmpty(this.Token);
+            ValidationHelper.ThrowIfNull(this.DomainContent);
             ValidationHelper.ThrowIfNullOrEmpty(this.DomainContent.Domain);
             ValidationHelper.ThrowIfNullOrEmpty(this.DomainContent.Content);
             ValidationHelper.ThrowIfFalse(!DnsSource.DnsTypes.ContainsKey(this.DomainContent.Type), nameof(this.DomainContent.Type));
