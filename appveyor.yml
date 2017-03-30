@@ -1,0 +1,7 @@
+version: 1.0.{build}
+configuration: Debug
+before_build:
+  - nuget restore
+build:
+  project: YandexDnsAPI\YandexDnsAPI.sln 
+  verbosity: minimal
