@@ -16,6 +16,7 @@ namespace YandexDnsAPI.Services
         private static readonly string AddDnsEndpoint = "https://pddimp.yandex.ru/api2/admin/dns/add";
         private static readonly string GetDnsEndpoint = "https://pddimp.yandex.ru/api2/admin/dns/list?domain=";
         private static readonly string EditDnsEndpoint = "https://pddimp.yandex.ru/api2/admin/dns/edit";
+        private static readonly string DeleteDnsEndpoint = "https://pddimp.yandex.ru/api2/admin/dns/del";
 
         public static async Task<RecordResponseModel> AddDnsRecord(AddDnsRequestModel request)
         {
@@ -37,9 +38,9 @@ namespace YandexDnsAPI.Services
 
             var response = await HttpHelper.RequestPostAsync<AddDnsResponseApiModel>(AddDnsEndpoint, request.Token, parameters);
 
+            ValidationHelper.ThrowIfNull(response);
             if (response.success == SuccessStates.Ok)
             {
-                ValidationHelper.ThrowIfNull(response);
                 return RecordResponseModel.FromApiModel(response.record);
             }
             else
@@ -55,6 +56,7 @@ namespace YandexDnsAPI.Services
             var uri = GetDnsEndpoint + request.Domain;
             var response = await HttpHelper.RequestGetAsync<GetDnsResponseApiModel>(uri, request.Token);
 
+            ValidationHelper.ThrowIfNull(response);
             if (response.success == SuccessStates.Ok)
             {
                 return response.records.Select(x => RecordResponseModel.FromApiModel(x));
@@ -89,10 +91,32 @@ namespace YandexDnsAPI.Services
 
             var response = await HttpHelper.RequestPostAsync<EditDnsResponseApiModel>(EditDnsEndpoint, request.Token, parameters);
 
+            ValidationHelper.ThrowIfNull(response);
             if (response.success == SuccessStates.Ok)
             {
-                ValidationHelper.ThrowIfNull(response);
                 return RecordResponseModel.FromApiModel(response.record);
+            }
+            else
+            {
+                throw new ApplicationException(response.error);
+            }
+        }
+
+        public static async Task<int> DeleteDnsRecord(DeleteDnsRequestModel request)
+        {
+            request.Validate();
+
+            var parameters = new Dictionary<string, string>();
+            parameters.Add(ApiParameters.Domain, request.Domain);
+            parameters.Add(ApiParameters.RecordId, request.RecordId.ToString());
+
+            var response = await HttpHelper.RequestPostAsync<DeleteDnsResponseApiModel>(DeleteDnsEndpoint, request.Token, parameters);
+
+            ValidationHelper.ThrowIfNull(response);
+            if (response.success == SuccessStates.Ok)
+            {
+                ValidationHelper.ThrowIfNull(response.record_id);
+                return response.record_id.Value;
             }
             else
             {
