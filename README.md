@@ -1,4 +1,4 @@
-# yandex-dns-api  [![Build status](https://ci.appveyor.com/api/projects/status/dj2lvre3av0pkfqw/branch/develop?svg=true)](https://ci.appveyor.com/project/Silvochka/yandex-dns-api/branch/develop)
+# yandex-dns-api  [![Build status](https://ci.appveyor.com/api/projects/status/dj2lvre3av0pkfqw/branch/develop?svg=true)](https://ci.appveyor.com/project/Silvochka/yandex-dns-api/branch/develop) [![NuGet Badge](https://buildstats.info/nuget/yandex-dns-api)](https://www.nuget.org/packages/yandex-dns-api/)
 C# wrapper for [Yandex DNS API](https://tech.yandex.ru/pdd/doc/concepts/api-dns-docpage/)
 
 Using this library, you can call Yandex API:
