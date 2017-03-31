@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>yandex-dns-api</id>
+    <version>1.0.0</version>
+    <authors>Evgenia Filatova</authors>
+    <licenseUrl>https://github.com/Silvochka/yandex-dns-api/blob/develop/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Silvochka/yandex-dns-api</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>C# wrapper for Yandex DNS API</description>
+    <releaseNotes>Implemented Wrapper for Add, Edit, Get and Delete Yandex DNS API</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Yandex DNS API</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="10.0.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="YandexDnsAPI\bin\Release\YandexDnsAPI.dll" target="lib\net45\YandexDnsAPI.dll" />
+    <file src="YandexDnsAPI\bin\Release\YandexDnsAPI.pdb" target="lib\net45\YandexDnsAPI.pdb" />
+  </files>
+</package>
