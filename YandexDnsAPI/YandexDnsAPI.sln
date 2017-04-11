@@ -7,14 +7,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YandexDnsAPI", "YandexDnsAP
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug-net45|Any CPU = Debug-net45|Any CPU
+		Debug-net46|Any CPU = Debug-net46|Any CPU
+		Release-net45|Any CPU = Release-net45|Any CPU
+		Release-net46|Any CPU = Release-net46|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Debug-net45|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Debug-net45|Any CPU.Build.0 = Debug|Any CPU
+		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Debug-net46|Any CPU.ActiveCfg = Debug-net46|Any CPU
+		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Debug-net46|Any CPU.Build.0 = Debug-net46|Any CPU
+		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Release-net45|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Release-net45|Any CPU.Build.0 = Release|Any CPU
+		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Release-net46|Any CPU.ActiveCfg = Release-net46|Any CPU
+		{4FA258AD-D033-4648-8E4D-8F8A0617DB47}.Release-net46|Any CPU.Build.0 = Release-net46|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
